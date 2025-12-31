@@ -67,88 +67,132 @@ mcp__molecular-mcp__run_md
 mcp__neural-mcp__train_model
 ```
 
-## Quick Start Examples
+## Quick Start
 
-Just describe what you want in natural language:
+**You know the physics. You know the math. You just don't want to learn SymPy, NumPy, or PyTorch APIs.**
 
-### Mathematics & Calculus
+Describe what you want in plain English—the plugin handles the implementation:
+
+---
+
+### See It In Action
+
+#### Quantum Interference
+> *"Create a video of a Gaussian wave packet passing through a triple slit"*
+
+![Triple Slit Interference](examples/final_interference_pattern.png)
+
+#### Signal Analysis
+> *"Analyze a signal with hidden frequencies at 10Hz, 25Hz, and 60Hz"*
+
+![Fourier Analysis](examples/fourier_analysis.png)
+
+#### Liquid Structure
+> *"Simulate 500 argon atoms equilibrating to a liquid and compute the radial distribution function"*
+
+![Argon Liquid RDF](examples/argon_liquid_demo.png)
+
+---
+
+### Relativity & Spacetime
 ```
-Find all solutions to x^4 - 13x^2 + 36 = 0
+Compute the Lorentz transformation for a frame moving at 0.8c
 
-Compute the integral of e^(-x^2) from negative infinity to infinity
+Derive the Schwarzschild metric and find the event horizon radius for a 10 solar mass black hole
 
-What's the Taylor series expansion of ln(1+x) around x=0 to 5th order?
+Calculate gravitational time dilation at Earth's surface vs GPS satellite altitude
 
-Solve the system: 3x + 2y - z = 1, x - y + 2z = 4, 2x + y - z = -1
+Solve the geodesic equation for a particle falling radially into a black hole
+
+Show length contraction and time dilation for a muon traveling at 0.99c
+```
+
+### Quantum Mechanics
+```
+Create a video of a Gaussian wave packet passing through a triple slit
+
+Simulate quantum tunneling through a rectangular barrier - what's the transmission probability?
+
+Show a particle in an infinite square well transitioning between energy eigenstates
+
+Model the Stern-Gerlach experiment with spin-1/2 particles
+
+Compute the hydrogen atom wavefunctions for n=1,2,3 and visualize the orbitals
+```
+
+### Statistical Mechanics & MD
+```
+Simulate 500 argon atoms equilibrating to a liquid at reduced temperature 0.8
+
+Model a Lennard-Jones fluid undergoing a liquid-gas phase transition
+
+Compute the velocity autocorrelation function and extract the diffusion coefficient
+
+Run a canonical ensemble simulation and verify the Maxwell-Boltzmann distribution
+
+Calculate the heat capacity from energy fluctuations in an NVT simulation
+```
+
+### Language Models & Embeddings
+```
+Train a small transformer on the tiny Shakespeare dataset and generate samples
+
+Create word embeddings from a corpus using skip-gram with negative sampling
+
+Build a character-level autoregressive model and train it on Python code
+
+Train a micro GPT (4 layers, 4 heads) on arithmetic expressions
+
+Fine-tune embeddings to cluster similar sentences together
+```
+
+### Neural Networks & Deep Learning
+```
+Train ResNet-18 on CIFAR-10 with cosine annealing and mixup augmentation
+
+Compare Adam, SGD with momentum, and AdamW on the same architecture
+
+Build an autoencoder for MNIST and visualize the latent space
+
+Train a VAE and interpolate between digits in latent space
+
+Run a hyperparameter sweep: learning rates from 1e-4 to 1e-2, batch sizes 32/64/128
+```
+
+### Mathematics & Analysis
+```
+Find all solutions to x^4 - 13x^2 + 36 = 0 over the reals and complex numbers
+
+Compute the Gaussian integral from negative infinity to infinity
+
+Solve the coupled ODEs: dx/dt = -y, dy/dt = x with initial conditions x(0)=1, y(0)=0
+
+Find the eigenvalues and eigenvectors of a 4x4 rotation matrix
+
+Symbolically solve the wave equation with given boundary conditions
 ```
 
 ### Signal Processing
 ```
-Analyze a noisy signal with hidden frequencies at 50Hz and 120Hz
+Decompose this signal into its frequency components and identify the dominant modes
 
-Create a 1024-point chirp signal and show its spectrogram
+Apply a Butterworth lowpass filter at 100Hz cutoff to remove high-frequency noise
 
-Filter out frequencies above 100Hz from my audio data
+Compute the spectrogram of an audio signal and find time-varying frequencies
+
+Cross-correlate two signals to find the time delay between them
 ```
 
-### Quantum Physics
+### Cross-Domain Problems
 ```
-Create a video of a Gaussian wave packet passing through a triple slit
+Train a neural network to learn the potential energy surface from MD trajectories
 
-Simulate quantum tunneling through a potential barrier and compute transmission probability
+Use FFT to analyze the power spectrum of quantum wavefunction oscillations
 
-Show the time evolution of a particle in a 2D hexagonal lattice potential
+Fit molecular simulation data to the Arrhenius equation and extract activation energy
 
-Compare interference patterns for single, double, and triple slit experiments
+Build a surrogate model for expensive quantum chemistry calculations
 ```
-
-### Molecular Dynamics
-```
-Simulate 500 argon atoms equilibrating to a liquid at reduced temperature 0.8
-
-Run an NVT simulation of a Lennard-Jones fluid and compute the radial distribution function
-
-Calculate the diffusion coefficient of particles in a dense fluid
-
-Model a phase transition by slowly heating a solid from T=0.5 to T=1.5
-```
-
-### Neural Networks
-```
-Train a ResNet-18 to classify CIFAR-10 images with cosine annealing
-
-Compare Adam vs SGD optimizers on MNIST with learning rates from 0.0001 to 0.01
-
-Find the best hyperparameters for a VGG-16 model on my image dataset
-
-Train a custom CNN with 3 conv layers and evaluate on the test set
-```
-
-### Multi-Domain Problems
-```
-Use FFT to analyze the frequency spectrum of a quantum wavefunction
-
-Compute the diffusion coefficient from MD and compare to Einstein relation
-
-Train a neural network to predict molecular potential energy surfaces
-```
-
-## Example Outputs
-
-### Triple Slit Quantum Interference
-*Prompt: "Create a video of a Gaussian wave packet passing through a triple slit"*
-
-![Triple Slit Interference](examples/final_interference_pattern.png)
-
-### Fourier Analysis
-*Prompt: "Analyze a signal with frequencies at 10Hz, 25Hz, and 60Hz"*
-
-![Fourier Analysis](examples/fourier_analysis.png)
-
-### Molecular Dynamics - Liquid Structure
-*Prompt: "Simulate argon atoms equilibrating to a liquid and compute the radial distribution function"*
-
-![Argon Liquid RDF](examples/argon_liquid_demo.png)
 
 ## GPU Acceleration
 
