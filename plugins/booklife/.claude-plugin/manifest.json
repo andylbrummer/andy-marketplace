@@ -1,0 +1,19 @@
+{
+  "name": "booklife",
+  "version": "1.0.0",
+  "description": "Reading life management powered by BookLife MCP - track books, manage library loans, sync reading status across Hardcover and Libby",
+  "author": {
+    "name": "Andy"
+  },
+  "categories": ["productivity", "personal"],
+  "keywords": [
+    "books",
+    "reading",
+    "library",
+    "hardcover",
+    "libby",
+    "reading-tracker",
+    "tbr",
+    "book-management"
+  ]
+}

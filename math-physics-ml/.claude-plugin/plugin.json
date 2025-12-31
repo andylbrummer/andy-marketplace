@@ -1,0 +1,25 @@
+{
+  "name": "math-physics-ml",
+  "version": "1.0.0",
+  "description": "GPU-accelerated MCP system for computational mathematics, quantum physics simulations, molecular dynamics, and neural network training",
+  "author": {
+    "name": "beagle"
+  },
+  "homepage": "https://github.com/beagle/math-mcp",
+  "repository": "https://github.com/beagle/math-mcp",
+  "license": "MIT",
+  "keywords": [
+    "math",
+    "physics",
+    "quantum",
+    "molecular-dynamics",
+    "neural-networks",
+    "gpu",
+    "sympy",
+    "numpy",
+    "cupy"
+  ],
+  "engines": {
+    "claude-code": ">=1.0.0"
+  }
+}

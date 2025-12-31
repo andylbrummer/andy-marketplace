@@ -1,0 +1,19 @@
+# Test artifacts
+*.png
+*.mp4
+*.log
+argon_liquid*.py
+fourier_analysis.py
+triple_slit_simulation.py
+simulation_output.log
+
+# Claude settings (local)
+.claude/
+
+# Node modules
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+.venv/

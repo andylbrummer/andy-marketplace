@@ -1,0 +1,44 @@
+{
+  "mcpServers": {
+    "math-mcp": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "/home/beagle/work/math-mcp",
+        "math-mcp"
+      ],
+      "description": "Math MCP - Symbolic algebra (SymPy) and GPU-accelerated numerical computing. Tools: symbolic_solve, symbolic_diff, symbolic_integrate, symbolic_simplify, create_array, matrix_multiply, solve_linear_system, fft, ifft, optimize_function, find_roots"
+    },
+    "quantum-mcp": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "/home/beagle/work/math-mcp",
+        "quantum-mcp"
+      ],
+      "description": "Quantum MCP - Wave mechanics and Schrodinger equation simulations. Tools: create_lattice_potential, create_custom_potential, create_gaussian_wavepacket, create_plane_wave, solve_schrodinger, solve_schrodinger_2d, analyze_wavefunction, visualize_potential, render_video"
+    },
+    "molecular-mcp": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "/home/beagle/work/math-mcp",
+        "molecular-mcp"
+      ],
+      "description": "Molecular MCP - Classical molecular dynamics simulations. Tools: create_particles, run_md, analyze_trajectory, compute_rdf, compute_msd"
+    },
+    "neural-mcp": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "/home/beagle/work/math-mcp",
+        "neural-mcp"
+      ],
+      "description": "Neural MCP - Neural network training and experimentation. Tools: define_model, load_dataset, train_model, evaluate_model, hyperparameter_tuning"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "andy-marketplace",
+  "owner": {
+    "name": "Andy",
+    "email": ""
+  },
+  "metadata": {
+    "description": "Personal development plugins for library book management, generative art, physics, mathematics, fitness, learning, goals, NVC, AI, and more",
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "booklife",
+      "source": "./plugins/booklife",
+      "description": "Reading life management powered by BookLife MCP - track books, manage library loans, sync reading status across Hardcover and Libby",
+      "version": "1.0.0",
+      "author": {
+        "name": "Andy"
+      },
+      "category": "productivity",
+      "keywords": ["books", "reading", "library", "hardcover", "libby", "reading-tracker", "tbr", "book-management"]
+    }
+  ]
+}
