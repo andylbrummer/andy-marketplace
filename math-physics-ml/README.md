@@ -194,6 +194,25 @@ Fit molecular simulation data to the Arrhenius equation and extract activation e
 Build a surrogate model for expensive quantum chemistry calculations
 ```
 
+---
+
+## 1000+ More Examples
+
+Browse extensive example collections organized by discipline:
+
+| Domain | Examples |
+|--------|----------|
+| [Physics](docs/examples-physics.md) | Mechanics, E&M, Quantum, Relativity, Fluids, Astrophysics |
+| [Chemistry](docs/examples-chemistry.md) | Quantum Chem, MD, Kinetics, Spectroscopy, Biochemistry |
+| [Mathematics](docs/examples-mathematics.md) | Calculus, Linear Algebra, PDEs, Number Theory, Optimization |
+| [Machine Learning](docs/examples-ml-ai.md) | Transformers, Vision, Generative Models, RL, GNNs |
+| [Engineering](docs/examples-engineering.md) | Structural, Electrical, Control Systems, Robotics |
+| [Biology](docs/examples-biology.md) | Systems Bio, Genomics, Neuroscience, Epidemiology |
+| [Finance](docs/examples-finance.md) | Options, Portfolio, Risk, Algo Trading, Econometrics |
+| [Data Science](docs/examples-data-science.md) | Statistics, Clustering, NLP, A/B Testing, Causal Inference |
+
+See [docs/README.md](docs/README.md) for the full index.
+
 ## GPU Acceleration
 
 All servers support CUDA GPU acceleration via CuPy. Set `use_gpu: true` on supported operations for significant speedups:
