@@ -133,6 +133,23 @@ Compute the diffusion coefficient from MD and compare to Einstein relation
 Train a neural network to predict molecular potential energy surfaces
 ```
 
+## Example Outputs
+
+### Triple Slit Quantum Interference
+*Prompt: "Create a video of a Gaussian wave packet passing through a triple slit"*
+
+![Triple Slit Interference](examples/final_interference_pattern.png)
+
+### Fourier Analysis
+*Prompt: "Analyze a signal with frequencies at 10Hz, 25Hz, and 60Hz"*
+
+![Fourier Analysis](examples/fourier_analysis.png)
+
+### Molecular Dynamics - Liquid Structure
+*Prompt: "Simulate argon atoms equilibrating to a liquid and compute the radial distribution function"*
+
+![Argon Liquid RDF](examples/argon_liquid_demo.png)
+
 ## GPU Acceleration
 
 All servers support CUDA GPU acceleration via CuPy. Set `use_gpu: true` on supported operations for significant speedups:

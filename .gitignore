@@ -1,11 +1,15 @@
-# Test artifacts
-*.png
-*.mp4
-*.log
+# Test artifacts (root level)
+/*.png
+/*.mp4
+/*.log
 argon_liquid*.py
 fourier_analysis.py
 triple_slit_simulation.py
 simulation_output.log
+
+# Allow example outputs
+!math-physics-ml/examples/*.png
+!math-physics-ml/examples/*.mp4
 
 # Claude settings (local)
 .claude/
@@ -17,3 +21,4 @@ node_modules/
 __pycache__/
 *.pyc
 .venv/
+demo_output.txt
