@@ -19,9 +19,6 @@
     "numpy",
     "cupy"
   ],
-  "engines": {
-    "claude-code": ">=1.0.0"
-  },
   "commands": [
     "./commands/solve.md",
     "./commands/integrate.md",
