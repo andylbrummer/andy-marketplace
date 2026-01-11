@@ -21,5 +21,23 @@
   ],
   "engines": {
     "claude-code": ">=1.0.0"
-  }
+  },
+  "commands": [
+    "./commands/solve.md",
+    "./commands/integrate.md",
+    "./commands/derive.md",
+    "./commands/fft.md",
+    "./commands/quantum-sim.md",
+    "./commands/md-sim.md",
+    "./commands/train.md",
+    "./commands/info.md"
+  ],
+  "skills": [
+    "./skills/math.md",
+    "./skills/quantum.md",
+    "./skills/molecular.md",
+    "./skills/neural.md",
+    "./skills/setup-mcp.md"
+  ],
+  "mcpServers": "./.mcp.json"
 }

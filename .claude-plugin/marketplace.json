@@ -20,6 +20,19 @@
       },
       "category": "productivity",
       "keywords": ["books", "reading", "library", "hardcover", "libby", "reading-tracker", "tbr", "book-management"]
+    },
+    {
+      "name": "math-physics-ml",
+      "source": "./math-physics-ml",
+      "description": "GPU-accelerated MCP system for computational mathematics, quantum physics simulations, molecular dynamics, and neural network training",
+      "version": "1.0.0",
+      "author": {
+        "name": "beagle"
+      },
+      "homepage": "https://github.com/beagle/math-mcp",
+      "repository": "https://github.com/beagle/math-mcp",
+      "category": "development",
+      "keywords": ["math", "physics", "quantum", "molecular-dynamics", "neural-networks", "gpu", "sympy", "numpy", "cupy"]
     }
   ]
 }

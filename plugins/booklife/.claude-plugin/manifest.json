@@ -15,5 +15,19 @@
     "reading-tracker",
     "tbr",
     "book-management"
+  ],
+  "commands": [
+    "./commands/find-at-library.md",
+    "./commands/reading-status.md",
+    "./commands/sync-now.md",
+    "./commands/tbr-review.md",
+    "./commands/whats-next.md"
+  ],
+  "skills": [
+    "./skills/reading-sync.md",
+    "./skills/library-search.md",
+    "./skills/tbr-management.md",
+    "./skills/book-discovery.md",
+    "./skills/setup-mcp.md"
   ]
 }
