@@ -203,31 +203,6 @@ Create or update Claude Code's MCP configuration file:
 }
 ```
 
-#### Alternative: Use mcp.json in plugin
-
-Create a `.mcp.json` file in the booklife plugin directory:
-
-```json
-{
-  "mcpServers": {
-    "booklife-mcp": {
-      "command": "uv",
-      "args": ["run", "--directory", "/path/to/booklife-mcp", "booklife-mcp"],
-      "env": {
-        "HARDCOVER_API_KEY": "${HARDCOVER_API_KEY}",
-        "LIBBY_CLONE_CODE": "${LIBBY_CLONE_CODE}"
-      }
-    }
-  }
-}
-```
-
-Then set environment variables in your shell profile:
-```bash
-export HARDCOVER_API_KEY="your-key"
-export LIBBY_CLONE_CODE="your-code"
-```
-
 #### Restart Claude Code
 
 After configuration, restart Claude Code to load the new MCP server.
