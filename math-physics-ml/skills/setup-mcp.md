@@ -1,6 +1,6 @@
 ---
 name: setup-mcp
-description: Install Math-Physics-ML MCP servers with intelligent detection - supports local installation, slop-mcp, or standard mcp.json configuration
+description: Install Math-Physics-ML MCP servers with intelligent detection - supports local installation, slop-mcp, or standard Claude configuration
 ---
 
 # Math-Physics-ML MCP Server Setup
@@ -9,15 +9,16 @@ This skill provides adaptive installation of the Math-Physics-ML MCP servers. It
 
 ## Overview
 
-The Math-Physics-ML plugin includes 4 MCP servers:
+The Math-Physics-ML plugin includes 5 MCP servers:
 1. **math-mcp** - Symbolic algebra (SymPy) and GPU-accelerated numerical computing
 2. **quantum-mcp** - Wave mechanics and Schrodinger equation simulations
 3. **molecular-mcp** - Classical molecular dynamics simulations
 4. **neural-mcp** - Neural network training and experimentation
+5. **superpredictor-mcp** - Probabilistic forecasting with Bayesian updates, Fermi estimation, and prediction markets
 
 These can be registered in two ways:
 1. **Via slop-mcp** - Centralized management with search, discovery, and orchestration
-2. **Via standard mcp.json** - Direct plugin-based configuration (already included)
+2. **Via Claude config** - Standard MCP configuration in Claude Code settings
 
 ## Prerequisites
 
@@ -73,6 +74,7 @@ uv run math-mcp --help
 uv run quantum-mcp --help
 uv run molecular-mcp --help
 uv run neural-mcp --help
+uv run scicomp-superpredictor-mcp --help
 ```
 
 ### Step 3: Detect slop-mcp Availability
@@ -89,7 +91,7 @@ Parameters: { "action": "list" }
 
 ### Step 4A: Install via slop-mcp
 
-When slop-mcp is available, register all 4 MCP servers for centralized management.
+When slop-mcp is available, register all 5 MCP servers for centralized management.
 
 #### Ask User for Scope Preference
 
@@ -159,6 +161,18 @@ Parameters: {
 }
 ```
 
+**Register superpredictor-mcp:**
+```
+Call: mcp__plugin_slop-mcp_slop-mcp__manage_mcps
+Parameters: {
+  "action": "register",
+  "name": "superpredictor-mcp",
+  "command": "uv",
+  "args": ["run", "--directory", "<MATH_MCP_PATH>", "scicomp-superpredictor-mcp"],
+  "scope": "<user's choice>"
+}
+```
+
 #### Verify Registration
 
 ```
@@ -170,17 +184,11 @@ If tools are returned, registration was successful. Repeat for other servers:
 - quantum-mcp: search for "wavefunction"
 - molecular-mcp: search for "particles"
 - neural-mcp: search for "train"
-
-#### Handle Duplicate Prevention
-
-If servers were registered via slop-mcp, inform the user that:
-- The plugin's built-in `.mcp.json` may create duplicate tool registrations
-- They can optionally rename `.mcp.json` to `.mcp.json.disabled` in the math-physics-ml plugin directory
-- Or simply be aware that slop-mcp registration takes precedence
+- superpredictor-mcp: search for "bayesian"
 
 ### Step 4B: Standard Installation (No slop-mcp)
 
-When slop-mcp is not available, use the standard plugin configuration.
+When slop-mcp is not available, configure via Claude Code's MCP settings.
 
 #### Verify math-mcp Repository
 
@@ -196,13 +204,13 @@ else
 fi
 ```
 
-#### Verify .mcp.json Configuration
+#### Create MCP Configuration
 
-The plugin's `.mcp.json` should already be loaded by Claude Code. Check that the paths are correct:
+Create or update Claude Code's MCP configuration file:
 
-1. Open `.mcp.json` in the math-physics-ml plugin directory
-2. Ensure the `--directory` arguments point to your math-mcp installation
-3. Update paths if necessary:
+**Location**: `~/.config/claude/claude_desktop_config.json`
+
+Add all five MCP servers:
 
 ```json
 {
@@ -210,20 +218,41 @@ The plugin's `.mcp.json` should already be loaded by Claude Code. Check that the
     "math-mcp": {
       "command": "uv",
       "args": ["run", "--directory", "/path/to/math-mcp", "math-mcp"]
+    },
+    "quantum-mcp": {
+      "command": "uv",
+      "args": ["run", "--directory", "/path/to/math-mcp", "quantum-mcp"]
+    },
+    "molecular-mcp": {
+      "command": "uv",
+      "args": ["run", "--directory", "/path/to/math-mcp", "molecular-mcp"]
+    },
+    "neural-mcp": {
+      "command": "uv",
+      "args": ["run", "--directory", "/path/to/math-mcp", "neural-mcp"]
+    },
+    "superpredictor-mcp": {
+      "command": "uv",
+      "args": ["run", "--directory", "/path/to/math-mcp", "scicomp-superpredictor-mcp"]
     }
   }
 }
 ```
 
+Replace `/path/to/math-mcp` with your actual math-mcp installation path.
+
+#### Restart Claude Code
+
+After configuration, restart Claude Code to load the new MCP servers.
+
 #### Troubleshooting
 
 If tools are not available:
-1. Ensure the math-physics-ml plugin is installed: `claude plugin list`
-2. Check plugin source: `claude plugin info math-physics-ml`
-3. Verify `.mcp.json` exists in plugin directory and paths are correct
-4. Ensure uv is installed and in PATH
-5. Run `uv sync` in the math-mcp directory to install dependencies
-6. Restart Claude Code to reload MCP servers
+1. Verify paths in configuration are correct
+2. Ensure uv is installed and in PATH
+3. Run `uv sync` in the math-mcp directory to install dependencies
+4. Check Claude Code logs for errors
+5. Restart Claude Code completely
 
 ## Available Tools After Setup
 
@@ -273,6 +302,33 @@ If tools are not available:
 | `evaluate_model` | Evaluate model performance |
 | `hyperparameter_tuning` | Automated hyperparameter search |
 
+### superpredictor-mcp Tools (27)
+| Tool | Description |
+|------|-------------|
+| `bayesian_update` | Update probability with Bayes' theorem |
+| `bayesian_chain` | Apply multiple sequential Bayesian updates |
+| `fermi_estimate` | Multiply factors with uncertainty propagation |
+| `fermi_decompose` | Get suggestions for decomposing a question |
+| `aggregate_forecasts` | Combine forecasts (mean, median, geometric, extremized) |
+| `confidence_interval` | Calculate Wilson score confidence intervals |
+| `create_prediction` | Store a new prediction |
+| `resolve_prediction` | Record actual outcome |
+| `get_calibration` | Calculate calibration statistics (Brier score, log score) |
+| `list_predictions` | Query stored predictions |
+| `search_metaculus` | Search Metaculus questions |
+| `get_metaculus_question` | Get community prediction |
+| `search_polymarket` | Search Polymarket prediction markets |
+| `get_polymarket_market` | Get market prices and volume |
+| `compare_to_markets` | Compare forecast to market consensus |
+| `search_base_rates` | Search for historical base rates |
+| `get_base_rate` | Get a specific base rate |
+| `suggest_base_rate` | Find relevant base rates for a question |
+| `fuzzy_evidence_confidence` | Evaluate confidence from evidence quality |
+| `fuzzy_risk_assessment` | Assess risk from probability, impact, controllability |
+| `problog_run` | Run raw ProbLog program |
+| `problog_diagnostic` | Diagnostic reasoning with test sensitivity/specificity |
+| `problog_causal` | Causal chain analysis |
+
 ## Quick Test
 
 Test math-mcp:
@@ -287,6 +343,12 @@ Call: mcp__quantum-mcp__create_gaussian_wavepacket
 Parameters: { "x0": 0, "sigma": 1, "k0": 5, "num_points": 256 }
 ```
 
+Test superpredictor-mcp:
+```
+Call: mcp__superpredictor-mcp__bayesian_update
+Parameters: { "prior": 0.1, "likelihood_given_h": 0.9, "likelihood_given_not_h": 0.3 }
+```
+
 ## Summary Output
 
 After setup, provide the user with:
@@ -294,7 +356,7 @@ After setup, provide the user with:
 1. **Math-MCP repository location**: Path to the installation
 2. **Installation method used**: slop-mcp or standard
 3. **Scope** (if slop-mcp): user/project/memory
-4. **Registered servers**: List of all 4 MCP servers
+4. **Registered servers**: List of all 5 MCP servers
 5. **Verification status**: Tools available and working
 6. **GPU availability**: Whether CUDA/CuPy is available for acceleration
-7. **Next steps**: Suggest running `/solve`, `/integrate`, or `/quantum-sim` commands
+7. **Next steps**: Suggest running `/solve`, `/integrate`, `/quantum-sim`, `/predict`, or `/fermi` commands

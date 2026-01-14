@@ -1,10 +1,10 @@
 # Math-Physics-ML Plugin
 
-GPU-accelerated MCP plugin for computational mathematics, quantum physics simulations, molecular dynamics, and neural network training.
+GPU-accelerated MCP plugin for computational mathematics, quantum physics simulations, molecular dynamics, neural network training, and probabilistic forecasting.
 
 ## Features
 
-This plugin provides access to 4 MCP servers:
+This plugin provides access to 5 MCP servers:
 
 | Server | Description | Tools |
 |--------|-------------|-------|
@@ -12,6 +12,7 @@ This plugin provides access to 4 MCP servers:
 | **quantum-mcp** | Wave mechanics & Schrodinger simulations | 12 tools |
 | **molecular-mcp** | Classical molecular dynamics | 13 tools |
 | **neural-mcp** | Neural network training | 15 tools |
+| **superpredictor-mcp** | Probabilistic forecasting & Bayesian reasoning | 27 tools |
 
 ## Installation
 
@@ -45,6 +46,8 @@ cp -r math-physics-ml ~/.claude/plugins/
 | `/math-physics-ml:quantum-sim` | Run quantum simulations |
 | `/math-physics-ml:md-sim` | Run molecular dynamics |
 | `/math-physics-ml:train` | Train neural networks |
+| `/math-physics-ml:predict` | Make probabilistic predictions |
+| `/math-physics-ml:fermi` | Fermi estimation |
 | `/math-physics-ml:info` | Server capabilities overview |
 
 ### Skills (AI-Invocable)
@@ -55,6 +58,7 @@ The plugin includes skills that Claude can invoke automatically:
 - **quantum** - Quantum mechanics simulations
 - **molecular** - Molecular dynamics simulations
 - **neural** - Neural network training
+- **superpredictor** - Probabilistic forecasting and Bayesian reasoning
 
 ### Direct MCP Tool Access
 
@@ -65,6 +69,7 @@ mcp__math-mcp__symbolic_solve
 mcp__quantum-mcp__create_gaussian_wavepacket
 mcp__molecular-mcp__run_md
 mcp__neural-mcp__train_model
+mcp__superpredictor-mcp__bayesian_update
 ```
 
 ## Quick Start
@@ -194,6 +199,25 @@ Fit molecular simulation data to the Arrhenius equation and extract activation e
 Build a surrogate model for expensive quantum chemistry calculations
 ```
 
+### Probabilistic Forecasting
+```
+What's the base rate for AI startup success? Update my prior given they raised Series A
+
+Fermi estimate: How many people are currently airborne over the US?
+
+I think there's a 40% chance of recession - what do prediction markets say?
+
+Update my 10% prior that this medical test is a true positive (95% sensitivity, 90% specificity)
+
+Aggregate these expert forecasts: 30%, 45%, 60%, 75% using extremized averaging
+
+What's the historical base rate for software projects finishing on time?
+
+Build a causal model: does rain → traffic → late arrival?
+
+Assess risk: high probability (0.8) but low impact ($1000) and partially controllable
+```
+
 ---
 
 ## 1000+ More Examples
@@ -225,18 +249,15 @@ All servers support CUDA GPU acceleration via CuPy. Set `use_gpu: true` on suppo
 
 ## Configuration
 
-The MCP servers are configured in `.mcp.json`. Modify paths if your math-mcp installation is in a different location:
+Run the setup skill to configure the MCP servers:
 
-```json
-{
-  "mcpServers": {
-    "math-mcp": {
-      "command": "uv",
-      "args": ["run", "--directory", "/path/to/math-mcp", "math-mcp"]
-    }
-  }
-}
 ```
+/math-physics-ml:setup-mcp
+```
+
+The setup skill will detect if slop-mcp is available and configure accordingly:
+- **With slop-mcp**: Registers servers via centralized MCP management
+- **Without slop-mcp**: Configures via `~/.config/claude/claude_desktop_config.json`
 
 ## Testing
 

@@ -1,7 +1,7 @@
 {
   "name": "math-physics-ml",
   "version": "1.0.0",
-  "description": "GPU-accelerated MCP system for computational mathematics, quantum physics simulations, molecular dynamics, and neural network training",
+  "description": "GPU-accelerated MCP system for computational mathematics, quantum physics simulations, molecular dynamics, neural network training, and probabilistic forecasting",
   "author": {
     "name": "beagle"
   },
@@ -17,7 +17,11 @@
     "gpu",
     "sympy",
     "numpy",
-    "cupy"
+    "cupy",
+    "prediction",
+    "forecasting",
+    "bayesian",
+    "fermi"
   ],
   "commands": [
     "./commands/solve.md",
@@ -27,14 +31,16 @@
     "./commands/quantum-sim.md",
     "./commands/md-sim.md",
     "./commands/train.md",
-    "./commands/info.md"
+    "./commands/info.md",
+    "./commands/predict.md",
+    "./commands/fermi.md"
   ],
   "skills": [
     "./skills/math.md",
     "./skills/quantum.md",
     "./skills/molecular.md",
     "./skills/neural.md",
+    "./skills/superpredictor.md",
     "./skills/setup-mcp.md"
-  ],
-  "mcpServers": "./.mcp.json"
+  ]
 }
