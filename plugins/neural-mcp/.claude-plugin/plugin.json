@@ -1,0 +1,30 @@
+{
+  "name": "neural-mcp",
+  "version": "0.1.6",
+  "description": "MCP server for neural network training and experimentation with PyTorch",
+  "author": {
+    "name": "Andy Brummer",
+    "url": "https://github.com/andylbrummer/math-mcp"
+  },
+  "homepage": "https://github.com/andylbrummer/math-mcp",
+  "repository": "https://github.com/andylbrummer/math-mcp",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "neural",
+    "network",
+    "deep-learning",
+    "pytorch",
+    "training",
+    "machine-learning",
+    "ai"
+  ],
+  "commands": [
+    "./commands/train.md",
+    "./commands/model.md",
+    "./commands/evaluate.md"
+  ],
+  "skills": [
+    "./skills/setup-mcp.md"
+  ]
+}

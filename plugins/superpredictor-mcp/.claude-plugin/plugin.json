@@ -1,0 +1,32 @@
+{
+  "name": "superpredictor-mcp",
+  "version": "0.2.0",
+  "description": "MCP server for probabilistic forecasting with Bayesian updates, Fermi estimation, prediction markets, and calibration tracking",
+  "author": {
+    "name": "Andy Brummer",
+    "url": "https://github.com/andylbrummer/math-mcp"
+  },
+  "homepage": "https://github.com/andylbrummer/math-mcp",
+  "repository": "https://github.com/andylbrummer/math-mcp",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "prediction",
+    "forecasting",
+    "bayesian",
+    "fermi",
+    "probability",
+    "calibration",
+    "metaculus",
+    "polymarket"
+  ],
+  "commands": [
+    "./commands/predict.md",
+    "./commands/fermi.md",
+    "./commands/calibrate.md",
+    "./commands/markets.md"
+  ],
+  "skills": [
+    "./skills/setup-mcp.md"
+  ]
+}

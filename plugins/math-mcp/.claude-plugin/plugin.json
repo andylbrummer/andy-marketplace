@@ -1,0 +1,34 @@
+{
+  "name": "math-mcp",
+  "version": "0.1.6",
+  "description": "MCP server for symbolic algebra and GPU-accelerated numerical computing with SymPy, NumPy, and optional CuPy",
+  "author": {
+    "name": "Andy Brummer",
+    "url": "https://github.com/andylbrummer/math-mcp"
+  },
+  "homepage": "https://github.com/andylbrummer/math-mcp",
+  "repository": "https://github.com/andylbrummer/math-mcp",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "math",
+    "symbolic",
+    "algebra",
+    "sympy",
+    "numpy",
+    "cupy",
+    "gpu",
+    "calculus",
+    "linear-algebra",
+    "fft"
+  ],
+  "commands": [
+    "./commands/solve.md",
+    "./commands/integrate.md",
+    "./commands/derive.md",
+    "./commands/fft.md"
+  ],
+  "skills": [
+    "./skills/setup-mcp.md"
+  ]
+}

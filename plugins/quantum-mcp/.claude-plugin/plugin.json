@@ -1,0 +1,30 @@
+{
+  "name": "quantum-mcp",
+  "version": "0.1.6",
+  "description": "MCP server for wave mechanics and Schrodinger equation simulations with GPU acceleration",
+  "author": {
+    "name": "Andy Brummer",
+    "url": "https://github.com/andylbrummer/math-mcp"
+  },
+  "homepage": "https://github.com/andylbrummer/math-mcp",
+  "repository": "https://github.com/andylbrummer/math-mcp",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "quantum",
+    "physics",
+    "schrodinger",
+    "wavefunction",
+    "wave-mechanics",
+    "simulation",
+    "gpu"
+  ],
+  "commands": [
+    "./commands/simulate.md",
+    "./commands/wavepacket.md",
+    "./commands/potential.md"
+  ],
+  "skills": [
+    "./skills/setup-mcp.md"
+  ]
+}

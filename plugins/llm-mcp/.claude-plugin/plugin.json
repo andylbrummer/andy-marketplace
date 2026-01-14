@@ -1,0 +1,30 @@
+{
+  "name": "llm-mcp",
+  "version": "0.1.6",
+  "description": "MCP server for LLM training, fine-tuning, and experimentation with GPT and Mamba architectures",
+  "author": {
+    "name": "Andy Brummer",
+    "url": "https://github.com/andylbrummer/math-mcp"
+  },
+  "homepage": "https://github.com/andylbrummer/math-mcp",
+  "repository": "https://github.com/andylbrummer/math-mcp",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "llm",
+    "language-model",
+    "gpt",
+    "mamba",
+    "transformer",
+    "training",
+    "fine-tuning"
+  ],
+  "commands": [
+    "./commands/train.md",
+    "./commands/model.md",
+    "./commands/tokenize.md"
+  ],
+  "skills": [
+    "./skills/setup-mcp.md"
+  ]
+}
