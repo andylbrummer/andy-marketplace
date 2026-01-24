@@ -1,6 +1,6 @@
 ---
 name: setup-mcp
-description: Install BookLife MCP server with intelligent detection - supports local installation, slop-mcp, or standard Claude configuration
+description: Install BookLife MCP server - uses npx booklife-mcp@latest with slop-mcp and standard config support
 ---
 
 # BookLife MCP Server Setup
@@ -14,9 +14,9 @@ BookLife MCP can be registered in two ways:
 2. **Via Claude config** - Standard MCP configuration in Claude Code settings
 
 The MCP server command resolution follows this priority:
-1. **~/.local/bin/booklife-mcp** - Preferred if exists (local installation)
-2. **npx @andy/booklife-mcp@latest** - Fallback if published to npm
-3. **uv run** - If installed via Python/uv
+1. **npx -y booklife-mcp@latest** - Primary method (npm package, no installation required)
+2. **~/.local/bin/booklife-mcp** - Fallback if exists (local binary installation)
+3. **uv run** - Legacy method for Python/uv development installation
 
 ## Prerequisites
 
@@ -41,9 +41,19 @@ Before installation, ensure you have:
    - Tap "Copy To Another Device"
    - Note the 8-digit code displayed
 
-### Step 2: Detect BookLife-MCP Installation
+### Step 2: Verify npm Package Availability
 
-Check common installation locations:
+The BookLife MCP server is available as an npm package that requires no installation:
+
+```bash
+# Verify npx can access the package
+npx -y booklife-mcp@latest --help
+```
+
+**If successful**: The npm package is available and ready to use with command `npx` and args `["-y", "booklife-mcp@latest"]`
+
+**Optional: Check for local installations**
+The following are optional fallback methods if npm is unavailable:
 
 ```bash
 # Check for local binary
@@ -61,26 +71,18 @@ BOOKLIFE_DIRS=(
 
 for dir in "${BOOKLIFE_DIRS[@]}"; do
   if [ -d "$dir" ] && [ -f "$dir/pyproject.toml" ]; then
-    echo "FOUND: $dir"
+    echo "FOUND: $dir (legacy Python installation)"
     break
   fi
 done
 ```
 
-**Record the result** for use in registration:
-- If binary found: Use `~/.local/bin/booklife-mcp` as command
-- If Python project found: Use `uv` with `["run", "--directory", "<path>", "booklife-mcp"]`
-- If neither found: Clone repository first
+**Recommended command for registration**:
+- **Primary**: `npx` with `["-y", "booklife-mcp@latest"]` (recommended)
+- **Fallback binary**: `~/.local/bin/booklife-mcp` with `[]` (if npm unavailable)
+- **Legacy Python**: `uv` with `["run", "--directory", "<path>", "booklife-mcp"]` (development only)
 
-### Step 3: Clone Repository (if needed)
-
-```bash
-git clone https://github.com/yourusername/booklife-mcp.git ~/work/booklife-mcp
-cd ~/work/booklife-mcp
-uv sync
-```
-
-### Step 4: Detect slop-mcp Availability
+### Step 3: Detect slop-mcp Availability
 
 Check if slop-mcp is available:
 
@@ -92,7 +94,7 @@ Parameters: { "action": "list" }
 **If successful** (returns list of MCPs): slop-mcp is available, proceed to Step 5A
 **If tool not found or errors**: slop-mcp not available, proceed to Step 5B
 
-### Step 5A: Install via slop-mcp
+### Step 4A: Install via slop-mcp
 
 When slop-mcp is available, register BookLife for centralized management.
 
@@ -120,14 +122,14 @@ Prompt user for their credentials:
 
 #### Register BookLife-MCP
 
-**If Python/uv installation:**
+**Primary method (npm package - recommended):**
 ```
 Call: mcp__plugin_slop-mcp_slop-mcp__manage_mcps
 Parameters: {
   "action": "register",
   "name": "booklife-mcp",
-  "command": "uv",
-  "args": ["run", "--directory", "<BOOKLIFE_PATH>", "booklife-mcp"],
+  "command": "npx",
+  "args": ["-y", "booklife-mcp@latest"],
   "env": {
     "HARDCOVER_API_KEY": "<user's key>",
     "LIBBY_CLONE_CODE": "<user's code>"
@@ -136,7 +138,7 @@ Parameters: {
 }
 ```
 
-**If binary installation:**
+**Fallback method (local binary):**
 ```
 Call: mcp__plugin_slop-mcp_slop-mcp__manage_mcps
 Parameters: {
@@ -144,6 +146,22 @@ Parameters: {
   "name": "booklife-mcp",
   "command": "/home/<user>/.local/bin/booklife-mcp",
   "args": [],
+  "env": {
+    "HARDCOVER_API_KEY": "<user's key>",
+    "LIBBY_CLONE_CODE": "<user's code>"
+  },
+  "scope": "<user's choice>"
+}
+```
+
+**Legacy method (Python/uv development installation):**
+```
+Call: mcp__plugin_slop-mcp_slop-mcp__manage_mcps
+Parameters: {
+  "action": "register",
+  "name": "booklife-mcp",
+  "command": "uv",
+  "args": ["run", "--directory", "<BOOKLIFE_PATH>", "booklife-mcp"],
   "env": {
     "HARDCOVER_API_KEY": "<user's key>",
     "LIBBY_CLONE_CODE": "<user's code>"
@@ -161,7 +179,7 @@ Parameters: { "query": "hardcover", "mcp_name": "booklife-mcp" }
 
 If tools are returned, registration was successful.
 
-### Step 5B: Standard Installation (No slop-mcp)
+### Step 4B: Standard Installation (No slop-mcp)
 
 When slop-mcp is not available, configure via Claude Code's MCP settings.
 
@@ -171,13 +189,13 @@ Create or update Claude Code's MCP configuration file:
 
 **Location**: `~/.config/claude/claude_desktop_config.json`
 
-**For uv-based installation:**
+**Primary method (npm package - recommended):**
 ```json
 {
   "mcpServers": {
     "booklife-mcp": {
-      "command": "uv",
-      "args": ["run", "--directory", "/path/to/booklife-mcp", "booklife-mcp"],
+      "command": "npx",
+      "args": ["-y", "booklife-mcp@latest"],
       "env": {
         "HARDCOVER_API_KEY": "your-hardcover-api-key",
         "LIBBY_CLONE_CODE": "your-8-digit-code"
@@ -187,13 +205,29 @@ Create or update Claude Code's MCP configuration file:
 }
 ```
 
-**For binary installation:**
+**Fallback method (local binary):**
 ```json
 {
   "mcpServers": {
     "booklife-mcp": {
       "command": "/home/username/.local/bin/booklife-mcp",
       "args": [],
+      "env": {
+        "HARDCOVER_API_KEY": "your-hardcover-api-key",
+        "LIBBY_CLONE_CODE": "your-8-digit-code"
+      }
+    }
+  }
+}
+```
+
+**Legacy method (Python/uv development installation):**
+```json
+{
+  "mcpServers": {
+    "booklife-mcp": {
+      "command": "uv",
+      "args": ["run", "--directory", "/path/to/booklife-mcp", "booklife-mcp"],
       "env": {
         "HARDCOVER_API_KEY": "your-hardcover-api-key",
         "LIBBY_CLONE_CODE": "your-8-digit-code"
@@ -278,15 +312,15 @@ Parameters: {}
 
 ### MCP Server Not Loading
 1. Check Claude Code logs for errors
-2. Verify paths in configuration are correct
-3. Ensure uv is installed and in PATH
-4. Run `uv sync` in booklife-mcp directory
+2. Verify npx is installed: `npx --version`
+3. Test the package directly: `npx -y booklife-mcp@latest --help`
+4. Ensure Node.js is installed and in PATH
 5. Restart Claude Code completely
 
 ### Tools Not Available
 1. Verify MCP server is registered: check slop-mcp list or Claude config
 2. Check for typos in environment variable names
-3. Ensure booklife-mcp can start: `uv run booklife-mcp --help`
+3. Ensure booklife-mcp can start: `npx -y booklife-mcp@latest --help`
 4. Look for startup errors in terminal output
 
 ## Security Notes
