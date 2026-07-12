@@ -1,6 +1,6 @@
 {
   "name": "molecular-mcp",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "MCP server for classical molecular dynamics simulations with GPU acceleration",
   "author": {
     "name": "Andy Brummer",

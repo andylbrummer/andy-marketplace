@@ -1,6 +1,6 @@
 {
   "name": "quantum-mcp",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "MCP server for wave mechanics and Schrodinger equation simulations with GPU acceleration",
   "author": {
     "name": "Andy Brummer",
