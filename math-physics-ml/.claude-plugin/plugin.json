@@ -34,13 +34,5 @@
     "./commands/info.md",
     "./commands/predict.md",
     "./commands/fermi.md"
-  ],
-  "skills": [
-    "./skills/math.md",
-    "./skills/quantum.md",
-    "./skills/molecular.md",
-    "./skills/neural.md",
-    "./skills/superpredictor.md",
-    "./skills/setup-mcp.md"
   ]
 }

@@ -1,3 +1,8 @@
+---
+name: molecular
+description: "Molecular dynamics simulations and particle systems via the Molecular MCP. Use when: creating particle systems, running classical MD simulations (NVE, NVT, NPT ensembles), analyzing trajectories, computing radial distribution functions (RDF) or mean squared displacement (MSD)."
+---
+
 # Molecular MCP Assistant
 
 Use this skill when the user asks about molecular dynamics simulations, particle systems, or needs to:

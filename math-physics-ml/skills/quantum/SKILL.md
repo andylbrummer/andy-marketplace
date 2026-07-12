@@ -1,3 +1,8 @@
+---
+name: quantum
+description: "Quantum mechanics and wave simulations via the Quantum MCP. Use when: creating and simulating quantum potentials, generating wave packets (Gaussian, plane waves), solving the time-dependent Schrodinger equation, analyzing wavefunctions and observables."
+---
+
 # Quantum MCP Assistant
 
 Use this skill when the user asks about quantum mechanics simulations, wave mechanics, or needs to:

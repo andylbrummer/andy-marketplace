@@ -1,3 +1,8 @@
+---
+name: neural
+description: "Neural network training and deep learning experiments via the Neural MCP. Use when: defining network architectures, loading and preparing datasets, training models with various optimizers, evaluating model performance."
+---
+
 # Neural MCP Assistant
 
 Use this skill when the user asks about neural network training, deep learning experiments, or needs to:

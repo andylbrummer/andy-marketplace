@@ -1,3 +1,8 @@
+---
+name: math
+description: "Symbolic mathematics and numerical computing via the Math MCP. Use when: solving algebraic equations symbolically, computing derivatives or integrals, matrix operations and linear algebra, fast Fourier transforms (FFT), numerical optimization."
+---
+
 # Math MCP Assistant
 
 Use this skill when the user asks about symbolic mathematics, numerical computing, or needs to perform calculations involving:

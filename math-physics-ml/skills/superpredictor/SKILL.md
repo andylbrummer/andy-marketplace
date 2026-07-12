@@ -1,3 +1,8 @@
+---
+name: superpredictor
+description: "Probabilistic forecasting and reasoning under uncertainty via the Superpredictor MCP. Use when: Bayesian probability updates with new evidence, Fermi estimation, aggregating multiple forecasts or expert opinions, tracking predictions and measuring calibration."
+---
+
 # Superpredictor MCP Assistant
 
 Use this skill when the user asks about probabilistic forecasting, prediction, estimation, or reasoning under uncertainty involving:
