@@ -34,6 +34,8 @@ const warnings = [];
 const fixes = [];
 /** Errors that --fix actually repaired. They must not block the commit. */
 const repaired = new Set();
+/** skill name -> where first seen; a duplicate name shadows another skill. */
+const skillNames = new Map();
 const err = (w, m) => errors.push([w, m]);
 const warn = (w, m) => warnings.push([w, m]);
 
@@ -177,17 +179,19 @@ function checkPlugin(name, source) {
       }
       const fm = checkMd(sp, `${rel}/skills/${skill}/SKILL.md`, "skill");
       // Claude namespaces plugin skills by DIRECTORY (`plugin:skill`), so the
-      // frontmatter `name` may legitimately differ. Two forms are accepted:
-      //   name == <skill>            (bare)
-      //   name == <plugin>-<skill>   (prefixed, used when the skill is also
-      //                               distributed standalone via `npx skills`)
-      // Anything else still dispatches (the name is unique), it is just off-convention
-      // and makes the standalone name unpredictable — warn, do not block the commit.
-      if (fm?.name && fm.name !== skill && fm.name !== `${name}-${skill}`)
-        warn(
-          `${rel}/skills/${skill}`,
-          `SKILL.md name '${fm.name}' is off-convention (expected '${skill}' or '${name}-${skill}')`,
-        );
+      // frontmatter `name` may legitimately differ from the directory, and often
+      // must: worktrack-loop's commands reference `Skill(worktrack-mcp-discovery)`
+      // by name, so those names are load-bearing. Do NOT enforce a naming
+      // convention here — it produced 24 warnings on names that were all correct.
+      //
+      // What DOES break is a duplicate name: two skills with the same `name`
+      // collide in the flat namespace that non-Claude agents dispatch from, and
+      // one silently shadows the other.
+      if (fm?.name) {
+        const prev = skillNames.get(fm.name);
+        if (prev) err(`${rel}/skills/${skill}`, `SKILL.md name '${fm.name}' is already used by ${prev}`);
+        else skillNames.set(fm.name, `${rel}/skills/${skill}`);
+      }
     }
   }
 

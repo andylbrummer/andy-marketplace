@@ -19,7 +19,26 @@
         "name": "Andy"
       },
       "category": "productivity",
-      "keywords": ["books", "reading", "library", "hardcover", "libby", "reading-tracker", "tbr", "book-management"]
+      "keywords": [
+        "books",
+        "reading",
+        "library",
+        "hardcover",
+        "libby",
+        "reading-tracker",
+        "tbr",
+        "book-management"
+      ]
+    },
+    {
+      "name": "llm-mcp",
+      "source": "./plugins/llm-mcp",
+      "description": "MCP server for LLM training, fine-tuning, and experimentation with GPT and Mamba architectures"
+    },
+    {
+      "name": "math-mcp",
+      "source": "./plugins/math-mcp",
+      "description": "MCP server for symbolic algebra and GPU-accelerated numerical computing with SymPy, NumPy, and optional CuPy"
     },
     {
       "name": "math-physics-ml",
@@ -32,7 +51,37 @@
       "homepage": "https://github.com/beagle/math-mcp",
       "repository": "https://github.com/beagle/math-mcp",
       "category": "development",
-      "keywords": ["math", "physics", "quantum", "molecular-dynamics", "neural-networks", "gpu", "sympy", "numpy", "cupy"]
+      "keywords": [
+        "math",
+        "physics",
+        "quantum",
+        "molecular-dynamics",
+        "neural-networks",
+        "gpu",
+        "sympy",
+        "numpy",
+        "cupy"
+      ]
+    },
+    {
+      "name": "molecular-mcp",
+      "source": "./plugins/molecular-mcp",
+      "description": "MCP server for classical molecular dynamics simulations with GPU acceleration"
+    },
+    {
+      "name": "neural-mcp",
+      "source": "./plugins/neural-mcp",
+      "description": "MCP server for neural network training and experimentation with PyTorch"
+    },
+    {
+      "name": "quantum-mcp",
+      "source": "./plugins/quantum-mcp",
+      "description": "MCP server for wave mechanics and Schrodinger equation simulations with GPU acceleration"
+    },
+    {
+      "name": "superpredictor-mcp",
+      "source": "./plugins/superpredictor-mcp",
+      "description": "MCP server for probabilistic forecasting with Bayesian updates, Fermi estimation, prediction markets, and calibration tracking"
     }
   ]
 }
