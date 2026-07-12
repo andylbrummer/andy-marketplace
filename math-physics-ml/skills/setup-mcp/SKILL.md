@@ -1,5 +1,5 @@
 ---
-name: setup-mcp
+name: math-physics-ml-setup-mcp
 description: Install Math-Physics-ML MCP servers with intelligent detection - supports local installation, slop-mcp, or standard Claude configuration
 ---
 

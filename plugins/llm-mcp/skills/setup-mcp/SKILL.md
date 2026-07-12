@@ -1,15 +1,15 @@
 ---
-name: setup-mcp
-description: Install math-mcp MCP server with intelligent detection - supports local installation via uv, slop-mcp registration
+name: llm-mcp-setup-mcp
+description: Install llm-mcp MCP server with intelligent detection - supports local installation via uv, slop-mcp registration
 ---
 
-# Math-MCP Server Setup
+# LLM-MCP Server Setup
 
-This skill provides adaptive installation of the math-mcp MCP server for symbolic algebra and GPU-accelerated numerical computing.
+This skill provides adaptive installation of the llm-mcp MCP server for LLM training and experimentation.
 
 ## Overview
 
-math-mcp can be registered in two ways:
+llm-mcp can be registered in two ways:
 1. **Via slop-mcp** - Centralized management with search, discovery, and orchestration
 2. **Via Claude config** - Standard MCP configuration in Claude Code settings
 
@@ -20,6 +20,8 @@ The MCP server runs via uv from the math-mcp monorepo.
 - **Python 3.11+**
 - **uv** package manager
 - **math-mcp repository** cloned locally
+- **PyTorch** (installed automatically)
+- **Transformers** (installed automatically)
 
 Install uv if not present:
 ```bash
@@ -62,7 +64,7 @@ Test that the MCP server can start:
 
 ```bash
 cd /path/to/math-mcp
-uv run scicomp-math-mcp --help
+uv run scicomp-llm-mcp --help
 ```
 
 ### Step 3: Detect slop-mcp Availability
@@ -79,11 +81,11 @@ Parameters: { "action": "list" }
 
 ### Step 4A: Install via slop-mcp
 
-When slop-mcp is available, register math-mcp for centralized management.
+When slop-mcp is available, register llm-mcp for centralized management.
 
 #### Check if Already Registered
 
-Look for "math-mcp" in the manage_mcps list response. If already registered, report status and skip registration.
+Look for "llm-mcp" in the manage_mcps list response. If already registered, report status and skip registration.
 
 #### Ask User for Scope Preference
 
@@ -97,7 +99,7 @@ Present the user with scope options:
 
 Default recommendation: `user` for persistent personal installation.
 
-#### Register math-mcp
+#### Register llm-mcp
 
 Replace `<MATH_MCP_PATH>` with the actual path (e.g., `/home/username/work/math-mcp`):
 
@@ -105,9 +107,9 @@ Replace `<MATH_MCP_PATH>` with the actual path (e.g., `/home/username/work/math-
 Call: mcp__plugin_slop-mcp_slop-mcp__manage_mcps
 Parameters: {
   "action": "register",
-  "name": "math-mcp",
+  "name": "llm-mcp",
   "command": "uv",
-  "args": ["run", "--directory", "<MATH_MCP_PATH>", "scicomp-math-mcp"],
+  "args": ["run", "--directory", "<MATH_MCP_PATH>", "scicomp-llm-mcp"],
   "scope": "<user's choice>"
 }
 ```
@@ -116,7 +118,7 @@ Parameters: {
 
 ```
 Call: mcp__plugin_slop-mcp_slop-mcp__search_tools
-Parameters: { "query": "symbolic", "mcp_name": "math-mcp" }
+Parameters: { "query": "tokenize", "mcp_name": "llm-mcp" }
 ```
 
 If tools are returned, registration was successful.
@@ -134,9 +136,9 @@ Create or update Claude Code's MCP configuration file:
 ```json
 {
   "mcpServers": {
-    "math-mcp": {
+    "llm-mcp": {
       "command": "uv",
-      "args": ["run", "--directory", "/path/to/math-mcp", "scicomp-math-mcp"]
+      "args": ["run", "--directory", "/path/to/math-mcp", "scicomp-llm-mcp"]
     }
   }
 }
@@ -152,30 +154,26 @@ After configuration, restart Claude Code to load the new MCP server.
 
 | Tool | Description |
 |------|-------------|
-| `symbolic_solve` | Solve equations symbolically |
-| `symbolic_diff` | Compute symbolic derivatives |
-| `symbolic_integrate` | Compute symbolic integrals |
-| `symbolic_simplify` | Simplify expressions |
-| `symbolic_expand` | Expand expressions |
-| `symbolic_factor` | Factor expressions |
-| `create_array` | Create NumPy/CuPy arrays |
-| `matrix_multiply` | GPU-accelerated matrix multiplication |
-| `solve_linear_system` | Solve Ax=b systems |
-| `fft` | Fast Fourier Transform |
-| `ifft` | Inverse FFT |
-| `optimize_function` | Numerical optimization |
-| `find_roots` | Root finding algorithms |
-| `eigenvalues` | Compute eigenvalues/eigenvectors |
+| `create_model` | Create GPT or Mamba model |
+| `load_pretrained` | Load pretrained model |
+| `tokenize_text` | Tokenize text with various tokenizers |
+| `load_dataset` | Load training datasets |
+| `train_model` | Train/fine-tune LLM |
+| `generate_text` | Generate text from model |
+| `evaluate_perplexity` | Compute perplexity on dataset |
+| `save_checkpoint` | Save model checkpoint |
+| `load_checkpoint` | Load model checkpoint |
 
 ## Quick Test
 
-Test symbolic solving:
+Tokenize some text:
 ```
-Call: mcp__math-mcp__symbolic_solve
-Parameters: { "equations": "x**2 - 4", "variables": "x" }
+Call: mcp__llm-mcp__tokenize_text
+Parameters: {
+  "text": "Hello, world!",
+  "tokenizer": "gpt2"
+}
 ```
-
-Expected result: `x = -2, 2`
 
 ## Summary Output
 
@@ -185,5 +183,5 @@ After setup, provide the user with:
 2. **Installation method used**: slop-mcp or standard
 3. **Scope** (if slop-mcp): user/project/memory
 4. **Verification status**: Tools available and working
-5. **GPU availability**: Whether CUDA/CuPy is available for acceleration
-6. **Next steps**: Suggest running `/math-mcp:solve` or `/math-mcp:integrate` commands
+5. **GPU availability**: Whether CUDA is available for training
+6. **Next steps**: Suggest running `/llm-mcp:model` or `/llm-mcp:train` commands

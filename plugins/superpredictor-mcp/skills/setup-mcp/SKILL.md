@@ -1,15 +1,15 @@
 ---
-name: setup-mcp
-description: Install llm-mcp MCP server with intelligent detection - supports local installation via uv, slop-mcp registration
+name: superpredictor-mcp-setup-mcp
+description: Install superpredictor-mcp MCP server with intelligent detection - supports local installation via uv, slop-mcp registration
 ---
 
-# LLM-MCP Server Setup
+# Superpredictor-MCP Server Setup
 
-This skill provides adaptive installation of the llm-mcp MCP server for LLM training and experimentation.
+This skill provides adaptive installation of the superpredictor-mcp MCP server for probabilistic forecasting and prediction tracking.
 
 ## Overview
 
-llm-mcp can be registered in two ways:
+superpredictor-mcp can be registered in two ways:
 1. **Via slop-mcp** - Centralized management with search, discovery, and orchestration
 2. **Via Claude config** - Standard MCP configuration in Claude Code settings
 
@@ -20,8 +20,6 @@ The MCP server runs via uv from the math-mcp monorepo.
 - **Python 3.11+**
 - **uv** package manager
 - **math-mcp repository** cloned locally
-- **PyTorch** (installed automatically)
-- **Transformers** (installed automatically)
 
 Install uv if not present:
 ```bash
@@ -64,7 +62,7 @@ Test that the MCP server can start:
 
 ```bash
 cd /path/to/math-mcp
-uv run scicomp-llm-mcp --help
+uv run scicomp-superpredictor-mcp --help
 ```
 
 ### Step 3: Detect slop-mcp Availability
@@ -81,11 +79,11 @@ Parameters: { "action": "list" }
 
 ### Step 4A: Install via slop-mcp
 
-When slop-mcp is available, register llm-mcp for centralized management.
+When slop-mcp is available, register superpredictor-mcp for centralized management.
 
 #### Check if Already Registered
 
-Look for "llm-mcp" in the manage_mcps list response. If already registered, report status and skip registration.
+Look for "superpredictor-mcp" in the manage_mcps list response. If already registered, report status and skip registration.
 
 #### Ask User for Scope Preference
 
@@ -99,7 +97,7 @@ Present the user with scope options:
 
 Default recommendation: `user` for persistent personal installation.
 
-#### Register llm-mcp
+#### Register superpredictor-mcp
 
 Replace `<MATH_MCP_PATH>` with the actual path (e.g., `/home/username/work/math-mcp`):
 
@@ -107,9 +105,9 @@ Replace `<MATH_MCP_PATH>` with the actual path (e.g., `/home/username/work/math-
 Call: mcp__plugin_slop-mcp_slop-mcp__manage_mcps
 Parameters: {
   "action": "register",
-  "name": "llm-mcp",
+  "name": "superpredictor-mcp",
   "command": "uv",
-  "args": ["run", "--directory", "<MATH_MCP_PATH>", "scicomp-llm-mcp"],
+  "args": ["run", "--directory", "<MATH_MCP_PATH>", "scicomp-superpredictor-mcp"],
   "scope": "<user's choice>"
 }
 ```
@@ -118,7 +116,7 @@ Parameters: {
 
 ```
 Call: mcp__plugin_slop-mcp_slop-mcp__search_tools
-Parameters: { "query": "tokenize", "mcp_name": "llm-mcp" }
+Parameters: { "query": "bayesian", "mcp_name": "superpredictor-mcp" }
 ```
 
 If tools are returned, registration was successful.
@@ -136,9 +134,9 @@ Create or update Claude Code's MCP configuration file:
 ```json
 {
   "mcpServers": {
-    "llm-mcp": {
+    "superpredictor-mcp": {
       "command": "uv",
-      "args": ["run", "--directory", "/path/to/math-mcp", "scicomp-llm-mcp"]
+      "args": ["run", "--directory", "/path/to/math-mcp", "scicomp-superpredictor-mcp"]
     }
   }
 }
@@ -152,26 +150,66 @@ After configuration, restart Claude Code to load the new MCP server.
 
 ## Available Tools After Setup
 
+### Bayesian Reasoning
 | Tool | Description |
 |------|-------------|
-| `create_model` | Create GPT or Mamba model |
-| `load_pretrained` | Load pretrained model |
-| `tokenize_text` | Tokenize text with various tokenizers |
-| `load_dataset` | Load training datasets |
-| `train_model` | Train/fine-tune LLM |
-| `generate_text` | Generate text from model |
-| `evaluate_perplexity` | Compute perplexity on dataset |
-| `save_checkpoint` | Save model checkpoint |
-| `load_checkpoint` | Load model checkpoint |
+| `bayesian_update` | Update probability with Bayes' theorem |
+| `bayesian_chain` | Apply multiple sequential updates |
+
+### Fermi Estimation
+| Tool | Description |
+|------|-------------|
+| `fermi_estimate` | Multiply factors with uncertainty propagation |
+| `fermi_decompose` | Get suggestions for decomposing a question |
+
+### Forecast Aggregation
+| Tool | Description |
+|------|-------------|
+| `aggregate_forecasts` | Combine forecasts (mean, median, geometric, extremized) |
+| `confidence_interval` | Calculate Wilson score confidence intervals |
+
+### Prediction Tracking
+| Tool | Description |
+|------|-------------|
+| `create_prediction` | Store a new prediction |
+| `resolve_prediction` | Record actual outcome |
+| `get_calibration` | Calculate calibration statistics |
+| `list_predictions` | Query stored predictions |
+
+### Prediction Markets
+| Tool | Description |
+|------|-------------|
+| `search_metaculus` | Search Metaculus questions |
+| `get_metaculus_question` | Get community prediction |
+| `search_polymarket` | Search Polymarket markets |
+| `get_polymarket_market` | Get market prices |
+| `compare_to_markets` | Compare forecast to consensus |
+
+### Base Rates
+| Tool | Description |
+|------|-------------|
+| `search_base_rates` | Search for historical base rates |
+| `get_base_rate` | Get a specific base rate |
+| `suggest_base_rate` | Find relevant base rates |
+
+### Fuzzy Logic & ProbLog
+| Tool | Description |
+|------|-------------|
+| `fuzzy_evidence_confidence` | Evaluate confidence from evidence quality |
+| `fuzzy_risk_assessment` | Assess risk from multiple factors |
+| `problog_run` | Run ProbLog program |
+| `problog_diagnostic` | Diagnostic reasoning |
+| `problog_causal` | Causal chain analysis |
 
 ## Quick Test
 
-Tokenize some text:
+Bayesian update:
 ```
-Call: mcp__llm-mcp__tokenize_text
+Call: mcp__superpredictor-mcp__bayesian_update
 Parameters: {
-  "text": "Hello, world!",
-  "tokenizer": "gpt2"
+  "prior": 0.1,
+  "likelihood_given_h": 0.9,
+  "likelihood_given_not_h": 0.3
 }
 ```
 
@@ -183,5 +221,4 @@ After setup, provide the user with:
 2. **Installation method used**: slop-mcp or standard
 3. **Scope** (if slop-mcp): user/project/memory
 4. **Verification status**: Tools available and working
-5. **GPU availability**: Whether CUDA is available for training
-6. **Next steps**: Suggest running `/llm-mcp:model` or `/llm-mcp:train` commands
+5. **Next steps**: Suggest running `/superpredictor-mcp:predict` or `/superpredictor-mcp:fermi` commands

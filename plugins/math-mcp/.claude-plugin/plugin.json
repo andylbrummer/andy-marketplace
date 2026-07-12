@@ -27,8 +27,5 @@
     "./commands/integrate.md",
     "./commands/derive.md",
     "./commands/fft.md"
-  ],
-  "skills": [
-    "./skills/setup-mcp.md"
   ]
 }

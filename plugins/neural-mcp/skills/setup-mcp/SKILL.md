@@ -1,15 +1,15 @@
 ---
-name: setup-mcp
-description: Install molecular-mcp MCP server with intelligent detection - supports local installation via uv, slop-mcp registration
+name: neural-mcp-setup-mcp
+description: Install neural-mcp MCP server with intelligent detection - supports local installation via uv, slop-mcp registration
 ---
 
-# Molecular-MCP Server Setup
+# Neural-MCP Server Setup
 
-This skill provides adaptive installation of the molecular-mcp MCP server for classical molecular dynamics simulations.
+This skill provides adaptive installation of the neural-mcp MCP server for neural network training and experimentation.
 
 ## Overview
 
-molecular-mcp can be registered in two ways:
+neural-mcp can be registered in two ways:
 1. **Via slop-mcp** - Centralized management with search, discovery, and orchestration
 2. **Via Claude config** - Standard MCP configuration in Claude Code settings
 
@@ -20,6 +20,7 @@ The MCP server runs via uv from the math-mcp monorepo.
 - **Python 3.11+**
 - **uv** package manager
 - **math-mcp repository** cloned locally
+- **PyTorch** (installed automatically with the package)
 
 Install uv if not present:
 ```bash
@@ -62,7 +63,7 @@ Test that the MCP server can start:
 
 ```bash
 cd /path/to/math-mcp
-uv run scicomp-molecular-mcp --help
+uv run scicomp-neural-mcp --help
 ```
 
 ### Step 3: Detect slop-mcp Availability
@@ -79,11 +80,11 @@ Parameters: { "action": "list" }
 
 ### Step 4A: Install via slop-mcp
 
-When slop-mcp is available, register molecular-mcp for centralized management.
+When slop-mcp is available, register neural-mcp for centralized management.
 
 #### Check if Already Registered
 
-Look for "molecular-mcp" in the manage_mcps list response. If already registered, report status and skip registration.
+Look for "neural-mcp" in the manage_mcps list response. If already registered, report status and skip registration.
 
 #### Ask User for Scope Preference
 
@@ -97,7 +98,7 @@ Present the user with scope options:
 
 Default recommendation: `user` for persistent personal installation.
 
-#### Register molecular-mcp
+#### Register neural-mcp
 
 Replace `<MATH_MCP_PATH>` with the actual path (e.g., `/home/username/work/math-mcp`):
 
@@ -105,9 +106,9 @@ Replace `<MATH_MCP_PATH>` with the actual path (e.g., `/home/username/work/math-
 Call: mcp__plugin_slop-mcp_slop-mcp__manage_mcps
 Parameters: {
   "action": "register",
-  "name": "molecular-mcp",
+  "name": "neural-mcp",
   "command": "uv",
-  "args": ["run", "--directory", "<MATH_MCP_PATH>", "scicomp-molecular-mcp"],
+  "args": ["run", "--directory", "<MATH_MCP_PATH>", "scicomp-neural-mcp"],
   "scope": "<user's choice>"
 }
 ```
@@ -116,7 +117,7 @@ Parameters: {
 
 ```
 Call: mcp__plugin_slop-mcp_slop-mcp__search_tools
-Parameters: { "query": "particles", "mcp_name": "molecular-mcp" }
+Parameters: { "query": "train", "mcp_name": "neural-mcp" }
 ```
 
 If tools are returned, registration was successful.
@@ -134,9 +135,9 @@ Create or update Claude Code's MCP configuration file:
 ```json
 {
   "mcpServers": {
-    "molecular-mcp": {
+    "neural-mcp": {
       "command": "uv",
-      "args": ["run", "--directory", "/path/to/math-mcp", "scicomp-molecular-mcp"]
+      "args": ["run", "--directory", "/path/to/math-mcp", "scicomp-neural-mcp"]
     }
   }
 }
@@ -152,27 +153,26 @@ After configuration, restart Claude Code to load the new MCP server.
 
 | Tool | Description |
 |------|-------------|
-| `create_particles` | Initialize particle configurations |
-| `create_lattice` | Create crystal lattice structures |
-| `run_md` | Run molecular dynamics simulation |
-| `analyze_trajectory` | Analyze simulation trajectories |
-| `compute_rdf` | Compute radial distribution function |
-| `compute_msd` | Compute mean square displacement |
-| `compute_energy` | Get potential/kinetic/total energy |
-| `save_trajectory` | Save trajectory to file |
-| `load_trajectory` | Load trajectory from file |
-| `visualize_config` | Generate configuration snapshot |
+| `define_model` | Define neural network architecture |
+| `load_dataset` | Load training/test datasets |
+| `train_model` | Train neural network |
+| `evaluate_model` | Evaluate model performance |
+| `save_model` | Save trained model |
+| `load_model` | Load saved model |
+| `hyperparameter_tuning` | Automated hyperparameter search |
+| `get_training_history` | Retrieve loss/accuracy history |
+| `visualize_model` | Generate architecture diagram |
 
 ## Quick Test
 
-Create argon particles:
+Define a simple MLP:
 ```
-Call: mcp__molecular-mcp__create_particles
+Call: mcp__neural-mcp__define_model
 Parameters: {
-  "num_particles": 108,
-  "box_size": 10.0,
-  "temperature": 300.0,
-  "particle_type": "argon"
+  "architecture": "mlp",
+  "input_size": 784,
+  "hidden_sizes": [256, 128],
+  "output_size": 10
 }
 ```
 
@@ -184,5 +184,5 @@ After setup, provide the user with:
 2. **Installation method used**: slop-mcp or standard
 3. **Scope** (if slop-mcp): user/project/memory
 4. **Verification status**: Tools available and working
-5. **GPU availability**: Whether CUDA/CuPy is available for acceleration
-6. **Next steps**: Suggest running `/molecular-mcp:simulate` or `/molecular-mcp:particles` commands
+5. **GPU availability**: Whether CUDA is available for training
+6. **Next steps**: Suggest running `/neural-mcp:model` or `/neural-mcp:train` commands

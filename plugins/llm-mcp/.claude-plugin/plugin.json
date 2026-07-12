@@ -23,8 +23,5 @@
     "./commands/train.md",
     "./commands/model.md",
     "./commands/tokenize.md"
-  ],
-  "skills": [
-    "./skills/setup-mcp.md"
   ]
 }

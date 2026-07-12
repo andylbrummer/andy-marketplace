@@ -23,8 +23,5 @@
     "./commands/train.md",
     "./commands/model.md",
     "./commands/evaluate.md"
-  ],
-  "skills": [
-    "./skills/setup-mcp.md"
   ]
 }

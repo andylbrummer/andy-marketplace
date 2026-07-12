@@ -1,15 +1,15 @@
 ---
-name: setup-mcp
-description: Install quantum-mcp MCP server with intelligent detection - supports local installation via uv, slop-mcp registration
+name: molecular-mcp-setup-mcp
+description: Install molecular-mcp MCP server with intelligent detection - supports local installation via uv, slop-mcp registration
 ---
 
-# Quantum-MCP Server Setup
+# Molecular-MCP Server Setup
 
-This skill provides adaptive installation of the quantum-mcp MCP server for wave mechanics and Schrodinger equation simulations.
+This skill provides adaptive installation of the molecular-mcp MCP server for classical molecular dynamics simulations.
 
 ## Overview
 
-quantum-mcp can be registered in two ways:
+molecular-mcp can be registered in two ways:
 1. **Via slop-mcp** - Centralized management with search, discovery, and orchestration
 2. **Via Claude config** - Standard MCP configuration in Claude Code settings
 
@@ -62,7 +62,7 @@ Test that the MCP server can start:
 
 ```bash
 cd /path/to/math-mcp
-uv run scicomp-quantum-mcp --help
+uv run scicomp-molecular-mcp --help
 ```
 
 ### Step 3: Detect slop-mcp Availability
@@ -79,11 +79,11 @@ Parameters: { "action": "list" }
 
 ### Step 4A: Install via slop-mcp
 
-When slop-mcp is available, register quantum-mcp for centralized management.
+When slop-mcp is available, register molecular-mcp for centralized management.
 
 #### Check if Already Registered
 
-Look for "quantum-mcp" in the manage_mcps list response. If already registered, report status and skip registration.
+Look for "molecular-mcp" in the manage_mcps list response. If already registered, report status and skip registration.
 
 #### Ask User for Scope Preference
 
@@ -97,7 +97,7 @@ Present the user with scope options:
 
 Default recommendation: `user` for persistent personal installation.
 
-#### Register quantum-mcp
+#### Register molecular-mcp
 
 Replace `<MATH_MCP_PATH>` with the actual path (e.g., `/home/username/work/math-mcp`):
 
@@ -105,9 +105,9 @@ Replace `<MATH_MCP_PATH>` with the actual path (e.g., `/home/username/work/math-
 Call: mcp__plugin_slop-mcp_slop-mcp__manage_mcps
 Parameters: {
   "action": "register",
-  "name": "quantum-mcp",
+  "name": "molecular-mcp",
   "command": "uv",
-  "args": ["run", "--directory", "<MATH_MCP_PATH>", "scicomp-quantum-mcp"],
+  "args": ["run", "--directory", "<MATH_MCP_PATH>", "scicomp-molecular-mcp"],
   "scope": "<user's choice>"
 }
 ```
@@ -116,7 +116,7 @@ Parameters: {
 
 ```
 Call: mcp__plugin_slop-mcp_slop-mcp__search_tools
-Parameters: { "query": "wavefunction", "mcp_name": "quantum-mcp" }
+Parameters: { "query": "particles", "mcp_name": "molecular-mcp" }
 ```
 
 If tools are returned, registration was successful.
@@ -134,9 +134,9 @@ Create or update Claude Code's MCP configuration file:
 ```json
 {
   "mcpServers": {
-    "quantum-mcp": {
+    "molecular-mcp": {
       "command": "uv",
-      "args": ["run", "--directory", "/path/to/math-mcp", "scicomp-quantum-mcp"]
+      "args": ["run", "--directory", "/path/to/math-mcp", "scicomp-molecular-mcp"]
     }
   }
 }
@@ -152,24 +152,28 @@ After configuration, restart Claude Code to load the new MCP server.
 
 | Tool | Description |
 |------|-------------|
-| `create_lattice_potential` | Create periodic lattice potentials |
-| `create_custom_potential` | Create custom potential functions |
-| `create_harmonic_potential` | Create harmonic oscillator potentials |
-| `create_gaussian_wavepacket` | Initialize Gaussian wave packets |
-| `create_plane_wave` | Initialize plane wave states |
-| `create_superposition` | Create superposition of states |
-| `solve_schrodinger` | Time-evolve 1D Schrodinger equation |
-| `solve_schrodinger_2d` | Time-evolve 2D Schrodinger equation |
-| `analyze_wavefunction` | Extract physical observables |
-| `visualize_potential` | Generate potential plots |
-| `render_video` | Create animation of time evolution |
+| `create_particles` | Initialize particle configurations |
+| `create_lattice` | Create crystal lattice structures |
+| `run_md` | Run molecular dynamics simulation |
+| `analyze_trajectory` | Analyze simulation trajectories |
+| `compute_rdf` | Compute radial distribution function |
+| `compute_msd` | Compute mean square displacement |
+| `compute_energy` | Get potential/kinetic/total energy |
+| `save_trajectory` | Save trajectory to file |
+| `load_trajectory` | Load trajectory from file |
+| `visualize_config` | Generate configuration snapshot |
 
 ## Quick Test
 
-Create a Gaussian wavepacket:
+Create argon particles:
 ```
-Call: mcp__quantum-mcp__create_gaussian_wavepacket
-Parameters: { "x0": 0, "sigma": 1, "k0": 5, "num_points": 256 }
+Call: mcp__molecular-mcp__create_particles
+Parameters: {
+  "num_particles": 108,
+  "box_size": 10.0,
+  "temperature": 300.0,
+  "particle_type": "argon"
+}
 ```
 
 ## Summary Output
@@ -181,4 +185,4 @@ After setup, provide the user with:
 3. **Scope** (if slop-mcp): user/project/memory
 4. **Verification status**: Tools available and working
 5. **GPU availability**: Whether CUDA/CuPy is available for acceleration
-6. **Next steps**: Suggest running `/quantum-mcp:simulate` or `/quantum-mcp:wavepacket` commands
+6. **Next steps**: Suggest running `/molecular-mcp:simulate` or `/molecular-mcp:particles` commands

@@ -1,15 +1,15 @@
 ---
-name: setup-mcp
-description: Install neural-mcp MCP server with intelligent detection - supports local installation via uv, slop-mcp registration
+name: math-mcp-setup-mcp
+description: Install math-mcp MCP server with intelligent detection - supports local installation via uv, slop-mcp registration
 ---
 
-# Neural-MCP Server Setup
+# Math-MCP Server Setup
 
-This skill provides adaptive installation of the neural-mcp MCP server for neural network training and experimentation.
+This skill provides adaptive installation of the math-mcp MCP server for symbolic algebra and GPU-accelerated numerical computing.
 
 ## Overview
 
-neural-mcp can be registered in two ways:
+math-mcp can be registered in two ways:
 1. **Via slop-mcp** - Centralized management with search, discovery, and orchestration
 2. **Via Claude config** - Standard MCP configuration in Claude Code settings
 
@@ -20,7 +20,6 @@ The MCP server runs via uv from the math-mcp monorepo.
 - **Python 3.11+**
 - **uv** package manager
 - **math-mcp repository** cloned locally
-- **PyTorch** (installed automatically with the package)
 
 Install uv if not present:
 ```bash
@@ -63,7 +62,7 @@ Test that the MCP server can start:
 
 ```bash
 cd /path/to/math-mcp
-uv run scicomp-neural-mcp --help
+uv run scicomp-math-mcp --help
 ```
 
 ### Step 3: Detect slop-mcp Availability
@@ -80,11 +79,11 @@ Parameters: { "action": "list" }
 
 ### Step 4A: Install via slop-mcp
 
-When slop-mcp is available, register neural-mcp for centralized management.
+When slop-mcp is available, register math-mcp for centralized management.
 
 #### Check if Already Registered
 
-Look for "neural-mcp" in the manage_mcps list response. If already registered, report status and skip registration.
+Look for "math-mcp" in the manage_mcps list response. If already registered, report status and skip registration.
 
 #### Ask User for Scope Preference
 
@@ -98,7 +97,7 @@ Present the user with scope options:
 
 Default recommendation: `user` for persistent personal installation.
 
-#### Register neural-mcp
+#### Register math-mcp
 
 Replace `<MATH_MCP_PATH>` with the actual path (e.g., `/home/username/work/math-mcp`):
 
@@ -106,9 +105,9 @@ Replace `<MATH_MCP_PATH>` with the actual path (e.g., `/home/username/work/math-
 Call: mcp__plugin_slop-mcp_slop-mcp__manage_mcps
 Parameters: {
   "action": "register",
-  "name": "neural-mcp",
+  "name": "math-mcp",
   "command": "uv",
-  "args": ["run", "--directory", "<MATH_MCP_PATH>", "scicomp-neural-mcp"],
+  "args": ["run", "--directory", "<MATH_MCP_PATH>", "scicomp-math-mcp"],
   "scope": "<user's choice>"
 }
 ```
@@ -117,7 +116,7 @@ Parameters: {
 
 ```
 Call: mcp__plugin_slop-mcp_slop-mcp__search_tools
-Parameters: { "query": "train", "mcp_name": "neural-mcp" }
+Parameters: { "query": "symbolic", "mcp_name": "math-mcp" }
 ```
 
 If tools are returned, registration was successful.
@@ -135,9 +134,9 @@ Create or update Claude Code's MCP configuration file:
 ```json
 {
   "mcpServers": {
-    "neural-mcp": {
+    "math-mcp": {
       "command": "uv",
-      "args": ["run", "--directory", "/path/to/math-mcp", "scicomp-neural-mcp"]
+      "args": ["run", "--directory", "/path/to/math-mcp", "scicomp-math-mcp"]
     }
   }
 }
@@ -153,28 +152,30 @@ After configuration, restart Claude Code to load the new MCP server.
 
 | Tool | Description |
 |------|-------------|
-| `define_model` | Define neural network architecture |
-| `load_dataset` | Load training/test datasets |
-| `train_model` | Train neural network |
-| `evaluate_model` | Evaluate model performance |
-| `save_model` | Save trained model |
-| `load_model` | Load saved model |
-| `hyperparameter_tuning` | Automated hyperparameter search |
-| `get_training_history` | Retrieve loss/accuracy history |
-| `visualize_model` | Generate architecture diagram |
+| `symbolic_solve` | Solve equations symbolically |
+| `symbolic_diff` | Compute symbolic derivatives |
+| `symbolic_integrate` | Compute symbolic integrals |
+| `symbolic_simplify` | Simplify expressions |
+| `symbolic_expand` | Expand expressions |
+| `symbolic_factor` | Factor expressions |
+| `create_array` | Create NumPy/CuPy arrays |
+| `matrix_multiply` | GPU-accelerated matrix multiplication |
+| `solve_linear_system` | Solve Ax=b systems |
+| `fft` | Fast Fourier Transform |
+| `ifft` | Inverse FFT |
+| `optimize_function` | Numerical optimization |
+| `find_roots` | Root finding algorithms |
+| `eigenvalues` | Compute eigenvalues/eigenvectors |
 
 ## Quick Test
 
-Define a simple MLP:
+Test symbolic solving:
 ```
-Call: mcp__neural-mcp__define_model
-Parameters: {
-  "architecture": "mlp",
-  "input_size": 784,
-  "hidden_sizes": [256, 128],
-  "output_size": 10
-}
+Call: mcp__math-mcp__symbolic_solve
+Parameters: { "equations": "x**2 - 4", "variables": "x" }
 ```
+
+Expected result: `x = -2, 2`
 
 ## Summary Output
 
@@ -184,5 +185,5 @@ After setup, provide the user with:
 2. **Installation method used**: slop-mcp or standard
 3. **Scope** (if slop-mcp): user/project/memory
 4. **Verification status**: Tools available and working
-5. **GPU availability**: Whether CUDA is available for training
-6. **Next steps**: Suggest running `/neural-mcp:model` or `/neural-mcp:train` commands
+5. **GPU availability**: Whether CUDA/CuPy is available for acceleration
+6. **Next steps**: Suggest running `/math-mcp:solve` or `/math-mcp:integrate` commands

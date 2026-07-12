@@ -23,8 +23,5 @@
     "./commands/simulate.md",
     "./commands/particles.md",
     "./commands/analyze.md"
-  ],
-  "skills": [
-    "./skills/setup-mcp.md"
   ]
 }

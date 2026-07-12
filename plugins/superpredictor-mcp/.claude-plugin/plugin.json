@@ -25,8 +25,5 @@
     "./commands/fermi.md",
     "./commands/calibrate.md",
     "./commands/markets.md"
-  ],
-  "skills": [
-    "./skills/setup-mcp.md"
   ]
 }
