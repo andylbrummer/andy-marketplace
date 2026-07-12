@@ -22,3 +22,8 @@ __pycache__/
 *.pyc
 .venv/
 demo_output.txt
+
+# Repo-local agent skills are part of the project and SHOULD be shared.
+!.claude/
+.claude/*
+!.claude/skills/
